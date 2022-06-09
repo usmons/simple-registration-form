@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Simple Registration Form</string>
+    <string name="fullname_empty">Full name couldn\'t be empty. Please enter your full name</string>
+    <string name="phone_empty">Phone number couldn\'t be empty. Please enter your phone number</string>
+    <string name="country_not_chosen">Country is not chosen yet. Please choose your country</string>
+    <string name="address_empty">Address couldn\'t be empty. Please enter your address</string>
+    <string name="password_invalid">Password should be at least 8 characters. Please use strongest password</string>
+    <string name="password_empty">Password couldn\'t be empty. Please enter your password</string>
+    <string name="phone_or_password_error">Phone number or password went wrong, Please try again</string>
+    <string name="something_went_wrong">Something went wrong. Please, try again</string>
+    <string name="user_already_exist">Such a phone number is available in the system. Please go to the login section</string>
+
 </resources>
