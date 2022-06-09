@@ -6,4 +6,6 @@ object Constants {
 
     const val DB_NAME = "registration_db"
     const val DB_VERSION = 1
+
+    const val PREFERENCES = "shared_pref"
 }
