@@ -2,6 +2,8 @@ package io.usmon.registration.di
 
 import android.content.Context
 import androidx.room.Room
+import io.usmon.registration.coroutine.DefaultDispatchers
+import io.usmon.registration.coroutine.DefaultDispatchersImpl
 import io.usmon.registration.data.data_source.UserDatabase
 import io.usmon.registration.data.repository.UserRepositoryImpl
 import io.usmon.registration.domain.repository.UserRepository
@@ -43,6 +45,10 @@ val appModule = module {
             loginUserUseCase = LoginUserUseCase(get(), get()),
             getAllUsers = GetAllUsers(get(), get())
         )
+    }
+
+    single<DefaultDispatchers> {
+        DefaultDispatchersImpl()
     }
 
 }
