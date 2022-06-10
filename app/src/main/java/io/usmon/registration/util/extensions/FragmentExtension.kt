@@ -1,5 +1,6 @@
 package io.usmon.registration.util.extensions
 
+import android.os.Build
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -12,7 +13,7 @@ import kotlinx.coroutines.launch
 
 fun <T> Fragment.collect(stateFlow: StateFlow<T>, run: (T) -> Unit) {
     viewLifecycleOwner.lifecycleScope.launch {
-        repeatOnLifecycle(Lifecycle.State.STARTED) {
+        viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
             stateFlow.collect {
                 run(it)
             }
@@ -22,10 +23,16 @@ fun <T> Fragment.collect(stateFlow: StateFlow<T>, run: (T) -> Unit) {
 
 fun <T> Fragment.collect(flow: Flow<T>, run: (T) -> Unit) {
     viewLifecycleOwner.lifecycleScope.launch {
-        repeatOnLifecycle(Lifecycle.State.STARTED) {
+        viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
             flow.collect {
                 run(it)
             }
         }
     }
+}
+
+fun <T> Fragment.sdk28orUp(body: () -> T): T? {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+        body()
+    } else null
 }

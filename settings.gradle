@@ -10,9 +10,6 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        //noinspection JcenterRepositoryObsolete
-        jcenter()
-        maven { url "https://jitpack.io" }
     }
 }
 rootProject.name = "Simple Registration Form"

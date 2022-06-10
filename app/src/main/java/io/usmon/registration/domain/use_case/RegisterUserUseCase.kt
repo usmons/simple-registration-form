@@ -63,6 +63,6 @@ class RegisterUserUseCase(
 
     sealed class Result {
         object Success : Result()
-        data class Error(val message: UiText) : Result()
+        data class Error(public val message: UiText) : Result()
     }
 }

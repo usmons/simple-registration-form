@@ -22,5 +22,12 @@
     <string name="address">Address</string>
     <string name="password">Password</string>
 
+    <!-- Image content descriptions -->
+    <string name="choose_image_for_profile">Choose image for profile</string>
+    <string name="gallery_or_camera">From where do you want to take the photo?</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="choose_country">Choose country</string>
+
 
 </resources>
