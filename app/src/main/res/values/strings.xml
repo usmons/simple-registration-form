@@ -21,13 +21,15 @@
     <string name="country">Country</string>
     <string name="address">Address</string>
     <string name="password">Password</string>
-
-    <!-- Image content descriptions -->
     <string name="choose_image_for_profile">Choose image for profile</string>
     <string name="gallery_or_camera">From where do you want to take the photo?</string>
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
     <string name="choose_country">Choose country</string>
+    <string name="more_icon">more icon</string>
+    <string name="users_does_not_exist_yet">Users doesn\'t exist yet.</string>
+    <string name="registered_users">Registered users</string>
+    <string name="logout">Logout</string>
 
 
 </resources>

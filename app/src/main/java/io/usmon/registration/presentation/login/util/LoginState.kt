@@ -1,4 +1,4 @@
-package io.usmon.registration.presentation.login
+package io.usmon.registration.presentation.login.util
 
 // Created by Usmon Abdurakhmanv on 6/9/2022.
 

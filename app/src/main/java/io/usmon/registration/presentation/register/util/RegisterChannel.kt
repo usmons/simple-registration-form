@@ -1,4 +1,4 @@
-package io.usmon.registration.presentation.register
+package io.usmon.registration.presentation.register.util
 
 import io.usmon.registration.util.UiText
 

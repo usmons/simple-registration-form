@@ -16,6 +16,8 @@ import io.usmon.registration.R
 import io.usmon.registration.databinding.FragmentRegisterBinding
 import io.usmon.registration.presentation.base.BaseFragment
 import io.usmon.registration.presentation.register.adapter.CountrySpinnerAdapter
+import io.usmon.registration.presentation.register.util.RegisterChannel
+import io.usmon.registration.presentation.register.util.RegisterEvent
 import io.usmon.registration.util.extensions.collect
 import io.usmon.registration.util.extensions.onChangedListener
 import io.usmon.registration.util.extensions.sdk28orUp
@@ -41,7 +43,7 @@ class RegisterFragment : BaseFragment<RegisterViewModel, FragmentRegisterBinding
             binding.profileImage.setImageBitmap(state.image ?: return@collect)
         }
 
-        collect(viewModel.registerUiEvent) { event ->
+        collect(viewModel.registerEvent) { event ->
             when (event) {
                 is RegisterChannel.ShowSnackbar -> {
                     Snackbar.make(
@@ -58,31 +60,31 @@ class RegisterFragment : BaseFragment<RegisterViewModel, FragmentRegisterBinding
 
 
         binding.fullName.onChangedListener {
-            viewModel.onEvent(RegisterUiEvent.FullNameChanged(it))
+            viewModel.onEvent(RegisterEvent.FullNameChanged(it))
         }
 
         binding.phoneNumber.onChangedListener {
-            viewModel.onEvent(RegisterUiEvent.PhoneNumberChanged(it))
+            viewModel.onEvent(RegisterEvent.PhoneNumberChanged(it))
         }
 
         binding.county.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                viewModel.onEvent(RegisterUiEvent.CountryChanged(position))
+                viewModel.onEvent(RegisterEvent.CountryChanged(position))
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) = Unit
         }
 
         binding.address.onChangedListener {
-            viewModel.onEvent(RegisterUiEvent.AddressChanged(it))
+            viewModel.onEvent(RegisterEvent.AddressChanged(it))
         }
 
         binding.password.onChangedListener {
-            viewModel.onEvent(RegisterUiEvent.PasswordChanged(it))
+            viewModel.onEvent(RegisterEvent.PasswordChanged(it))
         }
 
         binding.register.setOnClickListener {
-            viewModel.onEvent(RegisterUiEvent.Register)
+            viewModel.onEvent(RegisterEvent.Register)
         }
 
         binding.profileImage.setOnClickListener {
@@ -125,12 +127,12 @@ class RegisterFragment : BaseFragment<RegisterViewModel, FragmentRegisterBinding
     ) { result ->
         result?.data?.data?.let { uri ->
             val bitmap = uriToBitmap(uri)
-            viewModel.onEvent(RegisterUiEvent.ImageChanged(bitmap))
+            viewModel.onEvent(RegisterEvent.ImageChanged(bitmap))
         }
     }
 
     private val cameraLauncher = registerForActivityResult(ActivityResultContracts.TakePicturePreview()) {
-        viewModel.onEvent(RegisterUiEvent.ImageChanged(it ?: return@registerForActivityResult))
+        viewModel.onEvent(RegisterEvent.ImageChanged(it ?: return@registerForActivityResult))
     }
 
     @Suppress("DEPRECATION")

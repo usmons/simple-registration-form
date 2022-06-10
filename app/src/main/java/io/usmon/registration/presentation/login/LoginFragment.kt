@@ -4,6 +4,8 @@ import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import io.usmon.registration.databinding.FragmentLoginBinding
 import io.usmon.registration.presentation.base.BaseFragment
+import io.usmon.registration.presentation.login.util.LoginChannel
+import io.usmon.registration.presentation.login.util.LoginEvent
 import io.usmon.registration.util.extensions.collect
 import io.usmon.registration.util.extensions.onChangedListener
 import io.usmon.registration.util.extensions.update
@@ -22,7 +24,7 @@ class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginBinding>(Fragmen
         }
 
         // UI event
-        collect(viewModel.loginUiEvent) { event ->
+        collect(viewModel.loginEvent) { event ->
             when (event) {
                 is LoginChannel.Register -> {
                     //TODO: navigate to register
@@ -41,19 +43,19 @@ class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginBinding>(Fragmen
         }
 
         binding.phoneNumber.onChangedListener {
-            viewModel.onEvent(LoginUiEvent.PhoneNumberChanged(it))
+            viewModel.onEvent(LoginEvent.PhoneNumberChanged(it))
         }
 
         binding.password.onChangedListener {
-            viewModel.onEvent(LoginUiEvent.PasswordChanged(it))
+            viewModel.onEvent(LoginEvent.PasswordChanged(it))
         }
 
         binding.register.setOnClickListener {
-            viewModel.onEvent(LoginUiEvent.Register)
+            viewModel.onEvent(LoginEvent.Register)
         }
 
         binding.login.setOnClickListener {
-            viewModel.onEvent(LoginUiEvent.Login)
+            viewModel.onEvent(LoginEvent.Login)
         }
     }
 }

@@ -5,6 +5,9 @@ import androidx.lifecycle.viewModelScope
 import io.usmon.registration.coroutine.DefaultDispatchers
 import io.usmon.registration.domain.use_case.LoginUserUseCase
 import io.usmon.registration.domain.use_case.UseCases
+import io.usmon.registration.presentation.login.util.LoginChannel
+import io.usmon.registration.presentation.login.util.LoginEvent
+import io.usmon.registration.presentation.login.util.LoginState
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -17,32 +20,32 @@ class LoginViewModel(
     private var _loginState = MutableStateFlow(LoginState())
     val loginState: StateFlow<LoginState> = _loginState.asStateFlow()
 
-    private val _loginUiEvent = Channel<LoginChannel>()
-    val loginUiEvent: Flow<LoginChannel> = _loginUiEvent.receiveAsFlow()
+    private val _loginEvent = Channel<LoginChannel>()
+    val loginEvent: Flow<LoginChannel> = _loginEvent.receiveAsFlow()
 
 
-    fun onEvent(event: LoginUiEvent) {
+    fun onEvent(event: LoginEvent) {
         when (event) {
-            is LoginUiEvent.PhoneNumberChanged -> {
+            is LoginEvent.PhoneNumberChanged -> {
                 viewModelScope.launch(dispatchers.default) {
                     _loginState.value = loginState.value.copy(
                         phoneNumber = event.phoneNumber
                     )
                 }
             }
-            is LoginUiEvent.PasswordChanged -> {
+            is LoginEvent.PasswordChanged -> {
                 viewModelScope.launch(dispatchers.default) {
                     _loginState.value = loginState.value.copy(
                         password = event.password
                     )
                 }
             }
-            is LoginUiEvent.Register -> {
+            is LoginEvent.Register -> {
                 viewModelScope.launch(dispatchers.default) {
-                    _loginUiEvent.send(LoginChannel.Register)
+                    _loginEvent.send(LoginChannel.Register)
                 }
             }
-            is LoginUiEvent.Login -> {
+            is LoginEvent.Login -> {
                 viewModelScope.launch(dispatchers.io) {
                     val result = useCases.loginUserUseCase(
                         phoneNumber = loginState.value.phoneNumber,
@@ -50,10 +53,10 @@ class LoginViewModel(
                     )
                     when (result) {
                         is LoginUserUseCase.Result.Error -> {
-                            _loginUiEvent.send(LoginChannel.ShowSnackbar(result.message))
+                            _loginEvent.send(LoginChannel.ShowSnackbar(result.message))
                         }
                         is LoginUserUseCase.Result.Success -> {
-                            _loginUiEvent.send(LoginChannel.Success)
+                            _loginEvent.send(LoginChannel.Success)
                         }
                     }
                 }
