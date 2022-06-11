@@ -19,6 +19,7 @@ class UsersListAdapter(
             binding.apply {
                 fullName.text = user.fullName
                 phoneNumber.text = user.phoneNumber
+                user.image?.let { binding.profileImage.setImageBitmap(it) }
 
                 root.setOnClickListener {
                     event(Event.UserClicked(user))

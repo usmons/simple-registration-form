@@ -16,7 +16,7 @@ class PreferencesImpl(
     override fun registerUser(phoneNumber: String) {
         preferences.edit()
             .putString(PHONE_NUMBER, phoneNumber)
-            .apply()
+            .commit()
     }
 
     override fun getUser(): String? {

@@ -1,5 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/navigation">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/auth">
+
+    <navigation
+        android:id="@+id/main"
+        app:startDestination="@id/usersFragment">
+
+        <fragment
+            android:id="@+id/usersFragment"
+            android:name="io.usmon.registration.presentation.users.UsersFragment"
+            android:label="fragment_users"
+            tools:layout="@layout/fragment_users" />
+
+    </navigation>
+
+
+    <navigation
+        android:id="@+id/auth"
+        app:startDestination="@id/loginFragment">
+
+        <fragment
+            android:id="@+id/registerFragment"
+            android:name="io.usmon.registration.presentation.register.RegisterFragment"
+            android:label="fragment_register"
+            tools:layout="@layout/fragment_register">
+
+            <action
+                android:id="@+id/register_to_main"
+                app:destination="@id/main"
+                app:launchSingleTop="true"
+                app:popUpTo="@id/loginFragment"
+                app:popUpToInclusive="true" />
+
+        </fragment>
+
+        <fragment
+            android:id="@+id/loginFragment"
+            android:name="io.usmon.registration.presentation.login.LoginFragment"
+            android:label="fragment_login"
+            tools:layout="@layout/fragment_login">
+
+            <action
+                android:id="@+id/login_to_register"
+                app:destination="@id/registerFragment" />
+
+            <action
+                android:id="@+id/login_to_main"
+                app:destination="@id/main"
+                app:launchSingleTop="true"
+                app:popUpTo="@id/loginFragment"
+                app:popUpToInclusive="true" />
+
+        </fragment>
+
+    </navigation>
 
 </navigation>

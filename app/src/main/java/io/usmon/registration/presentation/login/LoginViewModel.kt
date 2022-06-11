@@ -8,13 +8,15 @@ import io.usmon.registration.domain.use_case.UseCases
 import io.usmon.registration.presentation.login.util.LoginChannel
 import io.usmon.registration.presentation.login.util.LoginEvent
 import io.usmon.registration.presentation.login.util.LoginState
+import io.usmon.registration.util.preferences.Preferences
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
     private val useCases: UseCases,
-    private val dispatchers: DefaultDispatchers
+    private val dispatchers: DefaultDispatchers,
+    private val preferences: Preferences
 ) : ViewModel() {
 
     private var _loginState = MutableStateFlow(LoginState())
@@ -23,6 +25,13 @@ class LoginViewModel(
     private val _loginEvent = Channel<LoginChannel>()
     val loginEvent: Flow<LoginChannel> = _loginEvent.receiveAsFlow()
 
+    init {
+        if (preferences.isUserAuthenticated()) {
+            viewModelScope.launch(dispatchers.default) {
+                _loginEvent.send(LoginChannel.Success)
+            }
+        }
+    }
 
     fun onEvent(event: LoginEvent) {
         when (event) {

@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="toolbar_style">
-        <item name="android:textSize">@dimen/abc_text_size_menu_material</item>
+        <item name="android:textSize">20sp</item>
+        <item name="fontFamily">@font/sf_pro_display_medium</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="bottom_sheet" parent="Theme.MaterialComponents.BottomSheetDialog">
         <item name="cornerFamilyTopLeft">rounded</item>
         <item name="cornerFamilyTopRight">rounded</item>
-        <item name="dialogCornerRadius">8dp</item>
+        <item name="android:topLeftRadius">100dp</item>
+        <item name="backgroundColor">@android:color/transparent</item>
+        <item name="android:topRightRadius">100dp</item>
     </style>
 </resources>

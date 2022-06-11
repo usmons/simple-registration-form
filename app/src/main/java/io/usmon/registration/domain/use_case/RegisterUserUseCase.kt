@@ -27,7 +27,7 @@ class RegisterUserUseCase(
         if (fullName.isBlank())
             return Result.Error(message = UiText.StringResource(R.string.fullname_empty))
 
-        if (phoneNumber.isBlank())
+        if (phoneNumber.filter { it.isDigit() }.isBlank())
             return Result.Error(message = UiText.StringResource(R.string.phone_empty))
 
         if (country < 0)
@@ -46,7 +46,7 @@ class RegisterUserUseCase(
 
             val userEntity = UserEntity(
                 fullName = fullName,
-                phoneNumber = phoneNumber,
+                phoneNumber = phoneNumber.filter { it.isDigit() },
                 country = country,
                 address = address,
                 password = password.hashCode(),

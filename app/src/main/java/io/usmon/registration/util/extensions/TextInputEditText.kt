@@ -6,6 +6,7 @@ import com.google.android.material.textfield.TextInputEditText
 // Created by Usmon Abdurakhmanv on 6/10/2022.
 
 fun TextInputEditText.update(text: String) {
+    if (this.text.toString() == text) return
     setText("")
     append(text)
 }

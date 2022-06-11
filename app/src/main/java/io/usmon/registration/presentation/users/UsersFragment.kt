@@ -26,10 +26,11 @@ class UsersFragment : BaseFragment<UsersViewModel, FragmentUsersBinding>(Fragmen
 
     override val viewModel: UsersViewModel by viewModel()
 
-    private lateinit var dialog: BottomSheetDialog
+    private var dialog: BottomSheetDialog? = null
 
     override fun myCreateView(savedInstanceState: Bundle?) {
 
+        setHasOptionsMenu(true)
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
         //We can use single lambda function on here, but given design is suck (you will find the design from README file)
@@ -74,21 +75,23 @@ class UsersFragment : BaseFragment<UsersViewModel, FragmentUsersBinding>(Fragmen
                 it.image?.let { image.setImageBitmap(it) }
             }
             dialog = BottomSheetDialog(requireContext(), R.style.bottom_sheet)
-            dialog.setContentView(dialogBinding.root)
-            dialog.show()
+            dialog?.setContentView(dialogBinding.root)
+            dialog?.show()
 
             dialogBinding.phone.setOnClickListener {
                 Toast.makeText(requireContext(), "Phone button has clicked!", Toast.LENGTH_SHORT).show()
-                dialog.dismiss()
+                dialog?.dismiss()
             }
 
             dialogBinding.message.setOnClickListener {
                 Toast.makeText(requireContext(), "Message button has clicked!", Toast.LENGTH_SHORT).show()
-                dialog.dismiss()
+                dialog?.dismiss()
             }
 
-            dialog.setOnDismissListener { viewModel.onEvent(UsersEvent.CloseDialog) }
-        } ?: dialog.dismiss()
+            dialog?.setOnDismissListener { viewModel.onEvent(UsersEvent.CloseDialog) }
+        } ?: dialog?.dismiss().also {
+            dialog = null
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

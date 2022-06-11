@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import io.usmon.registration.R
 import io.usmon.registration.databinding.SpinnerItemBinding
 
 // Created by Usmon Abdurakhmanv on 6/10/2022.
@@ -27,9 +26,12 @@ class CountrySpinnerAdapter(
     @SuppressLint("ViewHolder", "ResourceAsColor")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         return SpinnerItemBinding.inflate(LayoutInflater.from(parent?.context), parent, false).apply {
-            text.text = if (position == 0) defaultHint else values[position]
-            if (position == 0) text.setTextColor(R.color.hint)
+            text.text = if (position == 0) defaultHint else values[position - 1]
         }.root
+    }
+
+    override fun isEnabled(position: Int): Boolean {
+        return position != 0
     }
 }
 

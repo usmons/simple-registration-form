@@ -3,7 +3,7 @@
     <color name="backgroundColor">#FAFCFF</color>
     <color name="primaryTextColor">#303B4F</color>
     <color name="primaryColor">#166BFA</color>
-    <color name="hint">@color/primaryTextColor</color>
+    <color name="hint">#666666</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>

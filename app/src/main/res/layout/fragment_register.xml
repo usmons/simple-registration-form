@@ -58,6 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:hint="@string/full_name"
+            android:textColorHint="@color/hint"
             app:boxStrokeWidth="0.1dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -70,7 +71,8 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/field_background"
                 android:fontFamily="@font/sf_pro_display_regular"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textColor="@color/black" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -79,6 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:hint="@string/phone_number"
+            android:textColorHint="@color/hint"
             app:boxStrokeWidth="0.1dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -91,35 +94,24 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/field_background"
                 android:fontFamily="@font/sf_pro_display_regular"
-                android:inputType="phone" />
+                android:inputType="phone"
+                android:textColor="@color/black" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/county_til"
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/county"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:hint="@string/country"
+            android:background="@drawable/field_background"
+            android:spinnerMode="dialog"
             app:boxStrokeWidth="1dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/phone_number_til"
-            app:layout_constraintWidth_percent="0.8">
-
-            <Spinner
-                android:id="@+id/county"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/field_background"
-                android:padding="15dp"
-                android:spinnerMode="dialog"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/spinner_item" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintWidth_percent="0.8"
+            tools:listitem="@layout/spinner_item" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/address_til"
@@ -127,10 +119,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:hint="@string/address"
+            android:textColorHint="@color/hint"
             app:boxStrokeWidth="0.1dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/county_til"
+            app:layout_constraintTop_toBottomOf="@id/county"
             app:layout_constraintWidth_percent="0.8">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -139,7 +132,8 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/field_background"
                 android:fontFamily="@font/sf_pro_display_regular"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textColor="@color/black" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -148,6 +142,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:hint="@string/password"
+            android:textColorHint="@color/hint"
             app:boxStrokeWidth="0.1dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -160,7 +155,8 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/field_background"
                 android:fontFamily="@font/sf_pro_display_regular"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:textColor="@color/black" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

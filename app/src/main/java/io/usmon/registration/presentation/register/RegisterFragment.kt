@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.AdapterView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.launch
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import io.usmon.registration.R
 import io.usmon.registration.databinding.FragmentRegisterBinding
@@ -49,11 +50,12 @@ class RegisterFragment : BaseFragment<RegisterViewModel, FragmentRegisterBinding
                     Snackbar.make(
                         binding.root,
                         event.message.asString(requireContext()),
-                        Snackbar.LENGTH_SHORT
+                        Snackbar.LENGTH_LONG
                     ).show()
                 }
                 is RegisterChannel.Success -> {
                     // TODO: navigate to all users
+                    findNavController().navigate(R.id.register_to_main)
                 }
             }
         }
@@ -89,7 +91,7 @@ class RegisterFragment : BaseFragment<RegisterViewModel, FragmentRegisterBinding
 
         binding.profileImage.setOnClickListener {
             AlertDialog.Builder(requireContext()).apply {
-                setTitle(R.string.gallery_or_camera)
+                setMessage(R.string.gallery_or_camera)
                 setPositiveButton(R.string.camera) { _, _ ->
                     getImageFromCamera()
                 }
@@ -103,7 +105,7 @@ class RegisterFragment : BaseFragment<RegisterViewModel, FragmentRegisterBinding
     }
 
     private fun setupCountrySpinner() {
-        CountrySpinnerAdapter(
+        binding.county.adapter = CountrySpinnerAdapter(
             resources.getStringArray(R.array.countries),
             resources.getString(R.string.choose_country)
         )
